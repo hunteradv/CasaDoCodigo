@@ -22,15 +22,15 @@ namespace CasaDoCodigo.Models
         }
 
         [Required]
-        public string Id { get; private set; }
+        public string Code { get; private set; }
         [Required]
         public string Name { get; private set; }
         [Required]
         public decimal Price { get; private set; }
 
-        public Product(string id, string name, decimal price)
+        public Product(string code, string name, decimal price)
         {
-            this.Id = id;
+            this.Code = code;
             this.Name = name;
             this.Price = price;
         }
