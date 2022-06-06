@@ -2,41 +2,47 @@
 
 <h3>Catálogo</h3>
 
-@foreach(var product in Model)
-{
-    <div>@product.Name</div>
-}
-
 <div id="my-carousel" class="carousel slide" data-ride="carousel">
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
-        <div class="item active">
-            <div class="row">
 
-                @{
-                    var productsOfPage = Model.Take(4);
-                }
+        @{
+            const int PAGE_SIZE = 4;
 
-                @foreach (var product in productsOfPage)
-                {
-                    <div class="col-md-3 col-sm-3 col-lg-3">
-                        <div class="panel panel-default">
-                        <div class="panel-body">
-                            <img class="img-produto-carrossel" src="/images/products/large_@(product.Code).jpg" />
-                        </div>
-                        <div class="panel-footer produto-footer">
-                            <div class="produto-nome">@product.Name</div>
-                            <div><h4><strong>@product.Price</strong></h4></div>
-                            <div class="text-center">
-                                <a href="/" class="btn btn-success">Adicionar</a>
+            int pages = (int)Math.Ceiling((double)Model.Count() / PAGE_SIZE);
+        }
+
+        @for (var page = 0; page < pages; page++)
+        {
+            <div class="item @(page == 0 ? "active" : "")">
+                <div class="row">
+
+                    @{
+                        var productsOfPage = Model.Skip(page * PAGE_SIZE).Take(PAGE_SIZE);
+                    }
+
+                    @foreach (var product in productsOfPage)
+                    {
+                        <div class="col-md-3 col-sm-3 col-lg-3">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <img class="img-produto-carrossel" src="/images/products/large_@(product.Code).jpg" />
+                                </div>
+                                <div class="panel-footer produto-footer">
+                                    <div class="produto-nome">@product.Name</div>
+                                    <div><h4><strong>@product.Price</strong></h4></div>
+                                    <div class="text-center">
+                                        <a href="/" class="btn btn-success">Adicionar</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    }
                 </div>
-                }
-            </div>
 
-        </div>
+
+            </div>
+        }
     </div>
 
     <!-- Controls -->
