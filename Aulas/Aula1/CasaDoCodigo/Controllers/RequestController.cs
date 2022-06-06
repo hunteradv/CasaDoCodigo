@@ -19,8 +19,13 @@ namespace CasaDoCodigo.Controllers
         {
             return View();
         }
-        public IActionResult Cart()
+        public IActionResult Cart(string code)
         {
+            if (!string.IsNullOrEmpty(code))
+            {
+                requestRepository.AddItem(code);
+            }
+
             Request request = requestRepository.GetRequest();
             return View(request.Items);
         }

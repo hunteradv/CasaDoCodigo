@@ -1,5 +1,6 @@
 ﻿using CasaDoCodigo.Models;
 using Microsoft.AspNetCore.Http;
+using System;
 using System.Linq;
 
 namespace CasaDoCodigo.Repositories
@@ -7,6 +8,7 @@ namespace CasaDoCodigo.Repositories
     public interface IRequestRepository
     {
         Request GetRequest();
+        void AddItem(string code);
     }
 
     public class RequestRepository : BaseRepository<Request>, IRequestRepository
@@ -19,6 +21,28 @@ namespace CasaDoCodigo.Repositories
             this.contextAccessor = contextAccessor;
         }
 
+        public void AddItem(string code)
+        {
+            var product = context.Set<Product>().Where(p => p.Code == code).SingleOrDefault();
+
+            if (product == null)
+            {
+                throw new ArgumentException("Produto não encontrado");
+            }
+
+            var request = GetRequest();
+
+            var itemRequest = context.Set<ItemRequest>().Where(i => i.Product.Code == code && i.Request.Id == request.Id).SingleOrDefault();
+
+            if(itemRequest == null)
+            {
+                itemRequest = new ItemRequest(request, product, 1, product.Price);
+                context.Set<ItemRequest>().Add(itemRequest);
+
+                context.SaveChanges();
+            }
+        }
+
         public Request GetRequest()
         {
             var requestId = GetRequestId();
@@ -29,6 +53,7 @@ namespace CasaDoCodigo.Repositories
                 request = new Request();
                 DbSet.Add(request);
                 context.SaveChanges();
+                SetRequestId(request.Id);
             }
 
             return request;
