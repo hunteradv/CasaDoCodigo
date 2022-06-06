@@ -4,25 +4,25 @@ using System.Linq;
 
 namespace CasaDoCodigo.Repositories
 {
-    public class ProductRepository : IProductRepository
+    public class ProductRepository : BaseRepository<Product>, IProductRepository
     {
-        private readonly ApplicationContext context;
-
-        public ProductRepository(ApplicationContext context)
+        public ProductRepository(ApplicationContext context) : base(context)
         {
-            this.context = context;
         }
 
         public IList<Product> GetProducts()
         {
-            return context.Set<Product>().ToList();
+            return DbSet.ToList();
         }
 
         public void SaveProducts(List<Book> books)
         {
             foreach (var book in books)
-            {
-                context.Set<Product>().Add(new Product(book.Code, book.Name, book.Price));
+            {                
+                if (!DbSet.Where(p => p.Code == book.Code).Any())
+                {
+                    DbSet.Add(new Product(book.Code, book.Name, book.Price));
+                }
             }
 
             context.SaveChanges();
