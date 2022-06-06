@@ -1,11 +1,12 @@
 ﻿using CasaDoCodigo.Models;
 using Microsoft.AspNetCore.Http;
+using System.Linq;
 
 namespace CasaDoCodigo.Repositories
 {
     public interface IRequestRepository
-    { 
-
+    {
+        Request GetRequest();
     }
 
     public class RequestRepository : BaseRepository<Request>, IRequestRepository
@@ -16,6 +17,21 @@ namespace CasaDoCodigo.Repositories
             IHttpContextAccessor contextAccessor) : base(context)
         {
             this.contextAccessor = contextAccessor;
+        }
+
+        public Request GetRequest()
+        {
+            var requestId = GetRequestId();
+            var request = DbSet.Where(p => p.Id == requestId).SingleOrDefault();
+
+            if(request == null)
+            {
+                request = new Request();
+                DbSet.Add(request);
+                context.SaveChanges();
+            }
+
+            return request;
         }
 
         private int? GetRequestId()

@@ -1,4 +1,5 @@
-﻿using CasaDoCodigo.Repositories;
+﻿using CasaDoCodigo.Models;
+using CasaDoCodigo.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CasaDoCodigo.Controllers
@@ -6,10 +7,12 @@ namespace CasaDoCodigo.Controllers
     public class RequestController : Controller
     {
         private readonly IProductRepository productRepository;
+        private readonly IRequestRepository requestRepository;
 
-        public RequestController(IProductRepository productRepository)
+        public RequestController(IProductRepository productRepository, IRequestRepository requestRepository)
         {
             this.productRepository = productRepository;
+            this.requestRepository = requestRepository;
         }
 
         public IActionResult Register()
@@ -18,7 +21,8 @@ namespace CasaDoCodigo.Controllers
         }
         public IActionResult Cart()
         {
-            return View();
+            Request request = requestRepository.GetRequest();
+            return View(request.Items);
         }
         public IActionResult Carousel()
         {          
