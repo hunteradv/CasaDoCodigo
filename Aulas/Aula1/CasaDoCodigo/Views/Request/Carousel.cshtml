@@ -1,4 +1,11 @@
-﻿<h3>Catálogo</h3>
+﻿@model List<Product>;
+
+<h3>Catálogo</h3>
+
+@foreach(var product in Model)
+{
+    <div>@product.Name</div>
+}
 
 <div id="my-carousel" class="carousel slide" data-ride="carousel">
     <!-- Wrapper for slides -->

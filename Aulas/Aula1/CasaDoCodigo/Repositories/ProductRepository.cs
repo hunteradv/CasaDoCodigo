@@ -1,5 +1,6 @@
 ﻿using CasaDoCodigo.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CasaDoCodigo.Repositories
 {
@@ -10,6 +11,11 @@ namespace CasaDoCodigo.Repositories
         public ProductRepository(ApplicationContext context)
         {
             this.context = context;
+        }
+
+        public IList<Product> GetProducts()
+        {
+            return context.Set<Product>().ToList();
         }
 
         public void SaveProducts(List<Book> books)
