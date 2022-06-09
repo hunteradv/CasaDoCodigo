@@ -96,7 +96,22 @@
 {
     <script type="text/javascript">
         function clickIncrement(btn) {
-            let itemId = $(btn).attr('item-id');
+            let itemLine = $(btn).parents('[item-id]');
+            let itemId   = $(itemLine).attr('item-id');
+            let newQuantity   = $(itemLine).find('input').val();
+
+            let data = {
+                Id: itemId,
+                Quantity: newQuantity
+            };
+
+            $.ajax({
+                url:         '/request/updatequantity',
+                type:        'POST',
+                contentType: 'application/json',
+                data:        JSON.stringify( data )
+            });
+
             debugger;
         }
     </script>

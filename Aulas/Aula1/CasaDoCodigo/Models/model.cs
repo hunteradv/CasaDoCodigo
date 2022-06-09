@@ -63,15 +63,20 @@ namespace CasaDoCodigo.Models
         public string CEP { get; set; } = "";
     }
 
+    [DataContract]
     public class ItemRequest : BaseModel
     {   
         [Required]
+        [DataMember]
         public Request Request { get; private set; }
         [Required]
+        [DataMember]
         public Product Product { get; private set; }
         [Required]
+        [DataMember]
         public int Quantity { get; private set; }
         [Required]
+        [DataMember]
         public decimal UnitPrice { get; private set; }
 
         public ItemRequest()
