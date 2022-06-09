@@ -8,11 +8,13 @@ namespace CasaDoCodigo.Controllers
     {
         private readonly IProductRepository productRepository;
         private readonly IRequestRepository requestRepository;
+        private readonly IItemRequestRepository itemRequestRepository;
 
-        public RequestController(IProductRepository productRepository, IRequestRepository requestRepository)
+        public RequestController(IProductRepository productRepository, IRequestRepository requestRepository, IItemRequestRepository itemRequestRepository)
         {
             this.productRepository = productRepository;
             this.requestRepository = requestRepository;
+            this.itemRequestRepository = itemRequestRepository;            
         }
 
         public IActionResult Register()
@@ -42,7 +44,7 @@ namespace CasaDoCodigo.Controllers
         [HttpPost]
         public void UpdateQuantity([FromBody]ItemRequest itemRequest)
         {
-
+            itemRequestRepository.UpdateQuantity(itemRequest);
         }
     }
 }
