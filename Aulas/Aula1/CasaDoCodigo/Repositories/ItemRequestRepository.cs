@@ -1,4 +1,5 @@
 ﻿using CasaDoCodigo.Models;
+using System.Linq;
 
 namespace CasaDoCodigo.Repositories
 {
@@ -15,7 +16,15 @@ namespace CasaDoCodigo.Repositories
 
         public void UpdateQuantity(ItemRequest itemRequest)
         {
-            throw new System.NotImplementedException();
+            var itemRequestDB = DbSet.Where(ip => ip.Id == itemRequest.Id)
+                .SingleOrDefault();
+
+            if (itemRequestDB != null)
+            {
+                itemRequestDB.RefreshQuantity(itemRequest.Quantity);
+
+                context.SaveChanges();
+            }
         }
     }
 }
