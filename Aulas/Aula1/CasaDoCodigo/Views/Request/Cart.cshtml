@@ -39,7 +39,8 @@
                 <div class="col-md-2 text-center">
                     <div class="input-group">
                         <span class="input-group-btn">
-                            <button class="btn btn-default">
+                            <button class="btn btn-default"
+                                onclick="Cart.clickDecrement(this)">
                                 <span class="glyphicon-minus"></span>
                             </button>
                         </span>
@@ -47,7 +48,7 @@
                            class="form-control text-center" />
                         <span class="input-group-btn">
                             <button class="btn btn-default"
-                                onclick="clickIncrement(this)">
+                                onclick="Cart.clickIncrement(this)">
                                 <span class="glyphicon-plus"></span>
                             </button>
                         </span>
@@ -94,25 +95,5 @@
 
 @section Scripts
 {
-    <script type="text/javascript">
-        function clickIncrement(btn) {
-            let itemLine = $(btn).parents('[item-id]');
-            let itemId   = $(itemLine).attr('item-id');
-            let newQuantity   = $(itemLine).find('input').val();
-
-            let data = {
-                Id: itemId,
-                Quantity: newQuantity
-            };
-
-            $.ajax({
-                url:         '/request/updatequantity',
-                type:        'POST',
-                contentType: 'application/json',
-                data:        JSON.stringify( data )
-            });
-
-            debugger;
-        }
-    </script>
+    <script src="~/js/Cart.js"></script>
 }
