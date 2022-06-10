@@ -5,9 +5,14 @@
         this.postQuantity(data);               
     }
 
-    clickDecrement() {
+    clickDecrement(btn) {
         let data = this.getData(btn);
         data.Quantity--;
+        this.postQuantity(data);
+    }
+
+    updateQuantity(input) {
+        let data = this.getData(input);
         this.postQuantity(data);
     }
 
