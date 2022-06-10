@@ -1,6 +1,8 @@
 ﻿using CasaDoCodigo.Models;
+using CasaDoCodigo.Models.ViewModels;
 using CasaDoCodigo.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace CasaDoCodigo.Controllers
 {
@@ -28,8 +30,9 @@ namespace CasaDoCodigo.Controllers
                 requestRepository.AddItem(code);
             }
 
-            Request request = requestRepository.GetRequest();
-            return View(request.Items);
+            List<ItemRequest> items = requestRepository.GetRequest().Items;
+            CartViewModel cartViewModel = new CartViewModel(items);
+            return base.View (cartViewModel);
         }
         public IActionResult Carousel()
         {          
