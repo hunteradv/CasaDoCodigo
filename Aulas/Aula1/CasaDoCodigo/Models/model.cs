@@ -65,7 +65,7 @@ namespace CasaDoCodigo.Models
 
     [DataContract]
     public class ItemRequest : BaseModel
-    {   
+    {
         [Required]
         [DataMember]
         public Request Request { get; private set; }
@@ -78,6 +78,8 @@ namespace CasaDoCodigo.Models
         [Required]
         [DataMember]
         public decimal UnitPrice { get; private set; }
+        [DataMember]
+        public decimal Subtotal => Quantity * UnitPrice;
 
         public ItemRequest()
         {

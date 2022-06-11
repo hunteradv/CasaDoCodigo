@@ -34,9 +34,16 @@
             contentType: 'application/json',
             data: JSON.stringify(data)
         }).done(function (response) {
-            
+            let itemRequest = response.itemRequest;
+            let lineOfItem = $('[item-id=' + itemRequest.id + ']');                       
+            lineOfItem.find('input').val(itemRequest.quantity);
+            lineOfItem.find('[subtotal]').html((itemRequest.subtotal).twoHouses());
         });
     }
 }
 
 var cart = new Cart();
+
+Number.prototype.twoHouses = function() {
+    return this.toFixed(2).replace('.', ',');
+}
