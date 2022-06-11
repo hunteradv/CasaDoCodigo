@@ -38,6 +38,14 @@
             let lineOfItem = $('[item-id=' + itemRequest.id + ']');                       
             lineOfItem.find('input').val(itemRequest.quantity);
             lineOfItem.find('[subtotal]').html((itemRequest.subtotal).twoHouses());
+
+            let cartViewModel = response.cartViewModel;
+            $('[numero-itens]').html('Total: ' + cartViewModel.items.length + ' itens');
+            $('[total]').html((cartViewModel.total).twoHouses());
+
+            if (itemRequest.quantity == 0) {
+                lineOfItem.remove();
+            }
         });
     }
 }

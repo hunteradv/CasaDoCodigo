@@ -86,6 +86,11 @@ namespace CasaDoCodigo.Repositories
             {
                 itemRequestDB.RefreshQuantity(itemRequest.Quantity);
 
+                if (itemRequest.Quantity == 0)
+                {
+                    itemRequestRepository.RemoveItemRequest(itemRequest.Id);
+                }
+
                 context.SaveChanges();
 
                 var cartViewModel = new CartViewModel(GetRequest().Items);
