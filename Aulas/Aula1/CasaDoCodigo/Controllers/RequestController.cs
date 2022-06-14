@@ -21,6 +21,13 @@ namespace CasaDoCodigo.Controllers
 
         public IActionResult Register()
         {
+            var request = requestRepository.GetRequest();
+
+            if( request is null )
+            {
+                return RedirectToAction("Carousel");
+            }
+
             return View();
         }
         public IActionResult Cart(string code)
@@ -38,10 +45,12 @@ namespace CasaDoCodigo.Controllers
         {          
             return View(productRepository.GetProducts());
         }
-        public IActionResult Summary()
+
+        [HttpPost]
+        public IActionResult Summary(Register register)
         {
-            Request request = requestRepository.GetRequest();
-            return View(request);
+            
+            return View( requestRepository.GetRequest() );
         }
 
         [HttpPost]
