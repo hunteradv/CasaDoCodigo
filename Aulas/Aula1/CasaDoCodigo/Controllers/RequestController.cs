@@ -47,9 +47,10 @@ namespace CasaDoCodigo.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Summary(Register register)
         {
-            if( ModelState.IsValid )
+            if(ModelState.IsValid)
             {
                 return View(requestRepository.UpdateRegister(register));
             }
