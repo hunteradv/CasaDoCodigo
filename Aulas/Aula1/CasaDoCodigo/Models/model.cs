@@ -43,23 +43,25 @@ namespace CasaDoCodigo.Models
         }
 
         public virtual Request Request { get; set; }
-        [Required]
+        [MinLength(5, ErrorMessage = "Nome deve ter no mínimo 5 caracteres")]
+        [MaxLength(50, ErrorMessage = "Nome deve ter no máximo 50 caracteres")]
+        [Required(ErrorMessage = "Nome é obrigatório")]
         public string Name { get; set; } = "";
-        [Required]
+        [Required(ErrorMessage = "Email é obrigatório")]
         public string Email { get; set; } = "";
-        [Required]
+        [Required(ErrorMessage = "Telefone é obrigatório")]
         public string Telephone { get; set; } = "";
-        [Required]
+        [Required(ErrorMessage = "Endereço é obrigatório")]
         public string Address { get; set; } = "";
-        [Required]
+        [Required(ErrorMessage = "Complemento é obrigatório")]
         public string Complement { get; set; } = "";
-        [Required]
+        [Required(ErrorMessage = "Bairro é obrigatório")]
         public string District { get; set; } = "";
-        [Required]
+        [Required(ErrorMessage = "Cidade é obrigatória")]
         public string City { get; set; } = "";
-        [Required]
+        [Required(ErrorMessage = "UF é obrigatório")]
         public string UF { get; set; } = "";
-        [Required]
+        [Required(ErrorMessage = "CEP é obrigatório")]
         public string CEP { get; set; } = "";
     }
 
