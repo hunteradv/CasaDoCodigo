@@ -66,15 +66,15 @@ namespace CasaDoCodigo.Models
 
         internal void Update(Register newRegister)
         {
-            this.District = newRegister.District;
-            this.CEP = newRegister.CEP;
-            this.Complement = newRegister.Complement;
-            this.Email = newRegister.Email;
-            this.Address = newRegister.Address;
-            this.City = newRegister.City;
-            this.Name = newRegister.Name;
-            this.Telephone = newRegister.Telephone;
-            this.UF = newRegister.UF;
+            District = newRegister.District;
+            CEP = newRegister.CEP;
+            Complement = newRegister.Complement;
+            Email = newRegister.Email;
+            Address = newRegister.Address;
+            City = newRegister.City;
+            Name = newRegister.Name;
+            Telephone = newRegister.Telephone;
+            UF = newRegister.UF;
         }
     }
 
