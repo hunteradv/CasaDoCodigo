@@ -58,6 +58,7 @@ namespace CasaDoCodigo.Repositories
             var requestId = GetRequestId();
             var request = DbSet.Include(p => p.Items)
                     .ThenInclude(i => i.Product)
+                .Include( p => p.Register )
                 .Where(p => p.Id == requestId)
                 .SingleOrDefault();
 
