@@ -12,19 +12,23 @@ namespace CasaDoCodigo.Repositories
         Request GetRequest();
         void AddItem(string code);
         UpdateQuantityResponse UpdateQuantity(ItemRequest itemRequest);
+        Request UpdateRegister(Register register);
     }
 
     public class RequestRepository : BaseRepository<Request>, IRequestRepository
     {
         private readonly IHttpContextAccessor contextAccessor;
         private readonly IItemRequestRepository itemRequestRepository;
+        private readonly IRegisterRepository registerRepository;
 
         public RequestRepository(ApplicationContext context,
             IHttpContextAccessor contextAccessor,
-            IItemRequestRepository itemRequestRepository) : base(context)
+            IItemRequestRepository itemRequestRepository,
+            IRegisterRepository registerRepository) : base(context)
         {
             this.contextAccessor = contextAccessor;
             this.itemRequestRepository = itemRequestRepository;
+            this.registerRepository = registerRepository;
         }
 
         public void AddItem(string code)
@@ -99,6 +103,14 @@ namespace CasaDoCodigo.Repositories
             }
 
             throw new ArgumentException("ItemRequest não encontrado");
+        }
+
+        public Request UpdateRegister(Register register)
+        {
+            var request = GetRequest();
+            registerRepository.Update(request.Register.Id, register);
+
+            return request;
         }
     }
 }

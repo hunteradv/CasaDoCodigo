@@ -49,8 +49,12 @@ namespace CasaDoCodigo.Controllers
         [HttpPost]
         public IActionResult Summary(Register register)
         {
-            
-            return View( requestRepository.GetRequest() );
+            if( ModelState.IsValid )
+            {
+                return View(requestRepository.UpdateRegister(register));
+            }
+
+            return RedirectToAction("Register");
         }
 
         [HttpPost]
