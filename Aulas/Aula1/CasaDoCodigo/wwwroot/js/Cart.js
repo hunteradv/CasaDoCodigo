@@ -1,12 +1,12 @@
 ﻿class Cart {
-    clickIncrement(btn) {
-        let data = this.getData(btn);
+    clickIncrement(button) {
+        let data = this.getData(button);
         data.Quantity++;
         this.postQuantity(data);               
     }
 
-    clickDecrement(btn) {
-        let data = this.getData(btn);
+    clickDecrement(button) {
+        let data = this.getData(button);
         data.Quantity--;
         this.postQuantity(data);
     }
