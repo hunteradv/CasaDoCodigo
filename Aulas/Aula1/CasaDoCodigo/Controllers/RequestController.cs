@@ -59,6 +59,7 @@ namespace CasaDoCodigo.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public UpdateQuantityResponse UpdateQuantity([FromBody]ItemRequest itemRequest)
         {
             return requestRepository.UpdateQuantity(itemRequest);
